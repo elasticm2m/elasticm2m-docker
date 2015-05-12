@@ -14,4 +14,4 @@ ENV CATALINA_HOME /opt/tomcat
 ENV TOMCAT_HOME $CATALINA_HOME
 EXPOSE 8080
 
-CMD ["tomcat/bin/catalina.sh", "run"]
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
