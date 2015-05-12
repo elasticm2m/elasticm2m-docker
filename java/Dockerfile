@@ -1,9 +1,5 @@
-FROM ubuntu
+FROM elasticm2m/base:latest
 MAINTAINER ElasticM2M <elasticm2m@gmail.com>
-
-# Install the core dependencies
-RUN apt-get -y install wget
-RUN apt-get update && apt-get -y upgrade
 
 # Download and unpack Oracle Java 8 SDK
 WORKDIR /opt
@@ -15,4 +11,3 @@ RUN wget --no-check-certificate -c \
 
 ENV JAVA_HOME /opt/jdk1.8.0_45
 ENV PATH $JAVA_HOME/bin:$PATH
-
