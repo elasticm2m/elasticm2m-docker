@@ -6,7 +6,7 @@ WORKDIR /opt
 RUN wget http://www.us.apache.org/dist/tomcat/tomcat-8/v8.0.22/bin/apache-tomcat-8.0.22.tar.gz \
     && tar -xvzf apache-tomcat-8.0.22.tar.gz \
 	&& rm apache-tomcat-8.0.22.tar.gz \
-	&& rm -rf apache-tomcat-8.0.22/webapp/*
+	&& rm -rf apache-tomcat-8.0.22/webapps/*
 RUN ln -s apache-tomcat-8.0.22 tomcat
 
 # Update Environment
