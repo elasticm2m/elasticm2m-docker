@@ -14,4 +14,4 @@ ENV CATALINA_HOME /opt/tomcat
 ENV TOMCAT_HOME $CATALINA_HOME
 EXPOSE 8080
 
-CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+COPY tomcat.conf /etc/supervisor/conf.d/tomcat.conf
