@@ -8,6 +8,8 @@ RUN ln -s /opt/apache-storm-0.9.4 /opt/storm
 WORKDIR /opt/storm
 ENV STORM_HOME /opt/storm
 
+VOLUME ["/var/log/storm"]
+
 COPY storm.yaml $STORM_HOME/conf/storm.yaml
 COPY cluster.xml $STORM_HOME/logback/cluster.xml
 COPY configure-nimbus.sh /usr/bin/configure-nimbus.sh

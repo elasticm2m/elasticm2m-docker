@@ -13,7 +13,7 @@ COPY streamflow.yml /opt/streamflow/conf/streamflow.yml
 WORKDIR /opt/streamflow
 ENV STREAMFLOW_HOME /opt/streamflow
 
-VOLUME ["/opt/streamflow/data", "/opt/streamflow/conf"]
+VOLUME ["/opt/streamflow/data"]
 
 EXPOSE 8080
 
