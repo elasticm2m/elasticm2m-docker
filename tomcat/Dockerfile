@@ -1,14 +1,16 @@
-FROM elasticm2m/java:8u45
+FROM elasticm2m/java
 MAINTAINER ElasticM2M <elasticm2m@gmail.com>
 
 # Download and unpack Tomcat
-WORKDIR /opt
-RUN wget http://www.us.apache.org/dist/tomcat/tomcat-8/v8.0.22/bin/apache-tomcat-8.0.22.tar.gz
-RUN tar -xvzf apache-tomcat-8.0.22.tar.gz
-RUN rm apache-tomcat-8.0.22.tar.gz
+RUN wget -qO- http://www.us.apache.org/dist/tomcat/tomcat-8/v8.0.22/bin/apache-tomcat-8.0.22.tar.gz | tar xvz -C /opt \
+	&& rm -rf /opt/apache-tomcat-8.0.22/webapps/*
+RUN ln -s /opt/apache-tomcat-8.0.22 /opt/tomcat
 
-ENV CATALINA_HOME /opt/apache-tomcat-8.0.22
+WORKDIR /opt/tomcat
+
+ENV CATALINA_HOME /opt/tomcat
+ENV TOMCAT_HOME $CATALINA_HOME
 
 EXPOSE 8080
 
-CMD $CATALINA_HOME/bin/catalina.sh run
+COPY tomcat.conf /etc/supervisor/conf.d/tomcat.conf

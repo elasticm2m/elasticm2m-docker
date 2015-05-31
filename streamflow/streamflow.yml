@@ -1,0 +1,21 @@
+# Application Server Configuration
+server:
+    port: 8080
+
+# Logging Configuration
+logger:
+    level: DEBUG
+    baseDir: /var/log/storm
+    
+# Local Cluster Configuration
+localCluster:
+    enabled: false
+    
+# Cluster Configuration
+clusters:
+    - id: storm-cluster
+      displayName: Storm Cluster (%NIMBUS_HOST%)
+      nimbusHost: %NIMBUS_HOST%
+      nimbusPort: 6627 
+      logServerHost: %LOGSTASH_HOST%
+      logServerPort: 9200

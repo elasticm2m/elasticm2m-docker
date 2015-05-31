@@ -1,0 +1,30 @@
+# Zookeeper configuration
+storm.zookeeper.servers:
+    - "%ZOOKEEPER_HOST%"
+
+# Nimbus configuration
+nimbus.host: "%NIMBUS_HOST%"
+nimbus.childopts: "-Xmx512m"
+
+# DRPC configuration
+drpc.servers:
+  - "%NIMBUS_HOST%"
+drpc.port: 3772
+drpc.invocations.port: 3773
+drpc.childopts: "-Xmx128m"
+
+# UI configuration
+ui.port: 8080
+ui.childopts: "-Xmx128m"
+
+# Supervisor configuration
+supervisor.slots.ports:
+    - 6700
+    - 6701
+    - 6702
+    - 6703
+supervisor.childopts: "-Xmx256m"
+
+# Worker configuration
+worker.childopts: "-Xmx256m"
+
