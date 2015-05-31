@@ -4,7 +4,7 @@ storm.zookeeper.servers:
 
 # Nimbus configuration
 nimbus.host: "%NIMBUS_HOST%"
-nimbus.childopts: "-Xmx1024m"
+nimbus.childopts: "-Xmx512m"
 
 # DRPC configuration
 drpc.servers:
@@ -26,5 +26,5 @@ supervisor.slots.ports:
 supervisor.childopts: "-Xmx256m"
 
 # Worker configuration
-worker.childopts: "-Xmx384m"
+worker.childopts: "-Xmx256m"
 
