@@ -1,0 +1,4 @@
+#!/bin/bash
+
+NIMBUS=${NIMBUS_HOST:-${NIMBUS_PORT_6627_TCP_ADDR:-"UNAVAILABLE"}}
+sed -i -e "s/%NIMBUS_HOST%/$NIMBUS/g" $STREAMFLOW_HOME/conf/streamflow.yml

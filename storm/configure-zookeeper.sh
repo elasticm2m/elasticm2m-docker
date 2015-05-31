@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ZOOKEEPER=${ZOOKEEPER_HOST:-$ZOOKEEPER_PORT_2181_TCP_ADDR}
+sed -i -e "s/%ZOOKEEPER_HOST%/$ZOOKEEPER/g" $STORM_HOME/conf/storm.yaml
