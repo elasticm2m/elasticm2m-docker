@@ -1,4 +1,4 @@
-FROM elasticm2m/base:latest
+FROM elasticm2m/base:1.0
 MAINTAINER ElasticM2M <elasticm2m@gmail.com>
 
 # Download and unpack Oracle Java 8 SDK
@@ -10,5 +10,3 @@ RUN ln -s /opt/jdk1.8.0_45 /opt/java
 
 ENV JAVA_HOME /opt/jdk1.8.0_45
 ENV PATH $JAVA_HOME/bin:$PATH
-
-WORKDIR $JAVA_HOME

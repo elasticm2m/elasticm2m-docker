@@ -1,4 +1,4 @@
-FROM elasticm2m/java
+FROM elasticm2m/java:8
 MAINTAINER ElasticM2M <elasticm2m@gmail.com>
 
 # Download and unpack Tomcat
@@ -13,4 +13,4 @@ ENV TOMCAT_HOME $CATALINA_HOME
 
 EXPOSE 8080
 
-COPY tomcat.conf /etc/supervisor/conf.d/tomcat.conf
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
