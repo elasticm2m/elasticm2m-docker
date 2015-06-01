@@ -1,4 +1,4 @@
-FROM elasticm2m/storm:latest
+FROM elasticm2m/storm:0.9
 MAINTAINER ElasticM2M <elasticm2m@gmail.com>
 
 COPY storm-nimbus.conf /etc/supervisor/conf.d/storm-nimbus.conf
