@@ -1,4 +1,4 @@
-FROM elasticm2m/java:latest
+FROM elasticm2m/java:8
 MAINTAINER ElasticM2M <elasticm2m@gmail.com>
 
 # Download and unpack the Streamflow distribution

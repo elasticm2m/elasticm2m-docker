@@ -1,4 +1,4 @@
-FROM elasticm2m/base:latest
+FROM elasticm2m/base:1.0
 MAINTAINER ElasticM2M <elasticm2m@gmail.com>
 
 # Download and unpack Oracle Java 8 SDK

@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:trusty
 MAINTAINER ElasticM2M <elasticm2m@gmail.com>
 
 # Install the core dependencies
