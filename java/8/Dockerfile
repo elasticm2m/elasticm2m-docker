@@ -10,5 +10,3 @@ RUN ln -s /opt/jdk1.8.0_45 /opt/java
 
 ENV JAVA_HOME /opt/jdk1.8.0_45
 ENV PATH $JAVA_HOME/bin:$PATH
-
-WORKDIR $JAVA_HOME
