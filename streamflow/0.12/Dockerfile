@@ -2,7 +2,7 @@ FROM elasticm2m/java:8
 MAINTAINER ElasticM2M <elasticm2m@gmail.com>
 
 # Download and unpack the Streamflow distribution
-RUN wget -qO- https://github.com/lmco/streamflow/releases/download/0.12.0/streamflow-0.12.0.tar.gz | tar xvz -C /opt
+RUN wget -qO- https://github.com/lmco/streamflow/releases/download/0.12.1/streamflow-0.12.1.tar.gz | tar xvz -C /opt
 RUN ln -s /opt/streamflow-0.12.1 /opt/streamflow
 
 COPY configure-nimbus.sh /usr/bin/configure-nimbus.sh
