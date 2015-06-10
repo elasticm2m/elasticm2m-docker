@@ -8,5 +8,5 @@ RUN wget --no-check-certificate \
     -qO- http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.tar.gz | tar xvz -C /opt
 RUN ln -s /opt/jdk1.8.0_45 /opt/java
 
-ENV JAVA_HOME /opt/jdk1.8.0_45
+ENV JAVA_HOME /opt/java
 ENV PATH $JAVA_HOME/bin:$PATH
