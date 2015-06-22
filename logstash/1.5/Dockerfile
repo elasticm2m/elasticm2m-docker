@@ -5,13 +5,15 @@ MAINTAINER ElasticM2M <elasticm2m@gmail.com>
 RUN wget -qO- http://download.elastic.co/logstash/logstash/logstash-1.5.0.tar.gz | tar xvz -C /opt
 RUN ln -s /opt/logstash-1.5.0 /opt/logstash
 
-# Fix jruby issue with Oracle Java SDK
-RUN ln -s /lib/x86_64-linux-gnu/libcrypt.so.1 /usr/lib/x86_64-linux-gnu/libcrypt.so
-
-VOLUME ["/etc/logstash/conf.d"]
+COPY configure-logstash.sh /usr/bin/configure-logstash.sh
+COPY configure-elasticsearch.sh /usr/bin/configure-elasticsearch.sh
+COPY configure-redis.sh /usr/bin/configure-redis.sh
 
 WORKDIR /opt/logstash
 ENV LOGSTASH_HOME /opt/logstash
-EXPOSE 9292
 
-CMD ["/opt/logstash/bin/logstash", "agent", "-f", "/etc/logstash/conf.d"]
+# Scripts will copy all config files from /etc/logstash/conf.d to /etc/logstash/run.d and inject variables
+CMD /usr/bin/configure-logstash.sh \
+    && /usr/bin/configure-elasticsearch.sh \
+    && /usr/bin/configure-redis.sh \ 
+    && /opt/logstash/bin/logstash agent -f /etc/logstash/run.d 
