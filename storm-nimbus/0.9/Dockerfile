@@ -6,4 +6,5 @@ EXPOSE 6627
 CMD /usr/bin/configure-zookeeper.sh \
     && /usr/bin/configure-nimbus.sh \ 
     && /usr/bin/configure-stormlocal.sh \
+    && /usr/bin/configure-childopts.sh \
     && /opt/storm/bin/storm nimbus

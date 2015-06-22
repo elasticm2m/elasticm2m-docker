@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo "storm.local.hostname: `hostname -i`" >> $STORM_HOME/conf/storm.yaml
+STORM_LOCAL=`hostname -i`
+sed -i -e "s/%STORM_LOCAL%/$STORM_LOCAL/g" $STORM_HOME/conf/storm.yaml

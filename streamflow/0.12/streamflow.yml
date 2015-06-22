@@ -16,6 +16,6 @@ clusters:
     - id: storm-cluster
       displayName: Storm Cluster (%NIMBUS_HOST%)
       nimbusHost: %NIMBUS_HOST%
-      nimbusPort: 6627 
-      logServerHost: %LOGSTASH_HOST%
-      logServerPort: 9200
+      nimbusPort: %NIMBUS_PORT%
+      logServerHost: %ELASTICSEARCH_HOST%
+      logServerPort: %ELASTICSEARCH_PORT%
