@@ -3,8 +3,4 @@ MAINTAINER ElasticM2M <elasticm2m@gmail.com>
 
 EXPOSE 8080
 
-CMD /usr/bin/configure-zookeeper.sh \
-    && /usr/bin/configure-nimbus.sh \
-    && /usr/bin/configure-stormlocal.sh \
-    && /usr/bin/configure-childopts.sh \
-    && /opt/storm/bin/storm ui
+CMD /usr/bin/configure-storm.sh && /opt/storm/bin/storm ui
