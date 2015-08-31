@@ -3,7 +3,7 @@
 ################################################
 # CONFIGURE STORMLOCAL
 ################################################
-STORM_LOCAL=${STORM_LOCAL:-"`hostname`"}
+STORM_LOCAL=${STORM_LOCAL:-"`hostname -i`"}
 sed -i -e "s/%STORM_LOCAL%/$STORM_LOCAL/g" $STORM_HOME/conf/storm.yaml
 
 
