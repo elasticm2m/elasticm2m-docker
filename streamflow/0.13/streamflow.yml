@@ -4,7 +4,7 @@ server:
 
 # Topology Monitor Configuration
 monitor:
-    enabled: true
+    enabled: false
     pollingInterval: 60
 
 # Logging Configuration
