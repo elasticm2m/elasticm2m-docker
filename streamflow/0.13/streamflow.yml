@@ -2,6 +2,11 @@
 server:
     port: 8080
 
+# Topology Monitor Configuration
+monitor:
+    enabled: false
+    pollingInterval: 60
+
 # Logging Configuration
 logger:
     level: DEBUG
