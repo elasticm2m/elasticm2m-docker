@@ -61,14 +61,14 @@ RUN service postgresql start && \
 
 # Initial osm data to load in the database
 RUN mkdir -p /app/data/
-RUN wget --output-document=/app/data/data.pbf http://download.geofabrik.de/north-america/us/district-of-columbia-latest.osm.pbf
+RUN wget --output-document=/app/data/data.pbf http://download.geofabrik.de/north-america-latest.osm.pbf
 
 # Initialize the nominatim database and load the provided data
 RUN service postgresql start && \
     sudo -u nominatim ./utils/setup.php --osm-file /app/data/data.pbf --all --threads 2
 
 # Initialize the nominatim website
-RUN sudo mkdir -p /var/www/nominatim
+RUN mkdir -p /var/www/nominatim
 RUN ./utils/setup.php --create-website /var/www/nominatim
 RUN chmod -R 755 /var/www/nominatim
 RUN chown -R www-data:www-data /var/www/nominatim

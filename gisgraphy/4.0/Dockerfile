@@ -25,6 +25,9 @@ RUN chmod +x /opt/gisgraphy/*.sh
 ENV GISGRAPHY_HOME /opt/gisgraphy
 WORKDIR $GISGRAPHY_HOME
 
+# Reduce max memory of gisgraphy from 4G to 3G
+RUN sed -i -e "s/-Xmx4G/-Xmx3G/g" /opt/gisgraphy/start.sh
+
 COPY configure-postgres.sh /usr/bin/configure-postgres.sh
 COPY configure-solr.sh /usr/bin/configure-solr.sh
 
