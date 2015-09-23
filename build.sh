@@ -2,81 +2,37 @@
 
 # Returns the most recent image id for a given repository
 resolve_image_id() {
-    local REPOSITORY=$1
-    echo $(docker images | grep $REPOSITORY | head -n 1 | awk '{print $3}')
+    local repository=$1
+    echo $(docker images | grep $repository | head -n 1 | awk '{print $3}')
 }
 
 # Builds and pushes docker image with the associated tags
 docker_build_and_push() {
-    echo "Building repository: $REPOSITORY"
+    local repository=$1
+    local build_dir=$2
+    local tags=${@:3}
 
-    docker build -t "$REPOSITORY:latest" --pull=true "$BUILD_DIR"
-    local ID=$(resolve_image_id $REPOSITORY)
+    echo "Building repository: $repository"
 
-    for TAG in ${TAGS[@]}
+    docker build -t "$repository:latest" --pull=true "$build_dir"
+    local id=$(resolve_image_id $repository)
+
+    for tag in ${tags[@]}
     do
-        echo "Pushing Tag: $REPOSITORY:$TAG"
-        docker tag -f $ID $REPOSITORY:$TAG
-        docker push $REPOSITORY:$TAG
+        echo "Pushing Tag: $repository:$tag"
+        docker tag -f $id $repository:$tag
+        docker push $repository:$tag
     done
 }
 
-# Base Image
-REPOSITORY="elasticm2m/base"
-TAGS=("latest" "1.0" "1")
-BUILD_DIR="base/1.0"
-docker_build_and_push
-
-# Java Image
-REPOSITORY="elasticm2m/java"
-TAGS=("latest" "8" "8u45")
-BUILD_DIR="java/8"
-docker_build_and_push
-
-# Tomcat Image
-REPOSITORY="elasticm2m/tomcat"
-TAGS=("latest" "8.0" "8.0.26")
-BUILD_DIR="tomcat/8.0"
-docker_build_and_push
-
-# Zookeeper Image
-REPOSITORY="elasticm2m/zookeeper"
-TAGS=("latest" "3.4" "3.4.6")
-BUILD_DIR="zookeeper/3.4"
-docker_build_and_push
-
-# Storm Base Image
-REPOSITORY="elasticm2m/storm"
-TAGS=("latest" "0.9" "0.9.5")
-BUILD_DIR="storm/0.9"
-docker_build_and_push
-
-# Storm Nimbus Image
-REPOSITORY="elasticm2m/storm-nimbus"
-TAGS=("latest" "0.9" "0.9.5")
-BUILD_DIR="storm-nimbus/0.9"
-docker_build_and_push
-
-# Storm Supervisor Image
-REPOSITORY="elasticm2m/storm-supervisor"
-TAGS=("latest" "0.9" "0.9.5")
-BUILD_DIR="storm-supervisor/0.9"
-docker_build_and_push
-
-# Storm UI Image
-REPOSITORY="elasticm2m/storm-ui"
-TAGS=("latest" "0.9" "0.9.5")
-BUILD_DIR="storm-ui/0.9"
-docker_build_and_push
-
-# Logstash Image
-REPOSITORY="elasticm2m/logstash"
-TAGS=("latest" "1.5" "1.5.0")
-BUILD_DIR="logstash/1.5"
-docker_build_and_push
-
-# Streamflow Image
-REPOSITORY="elasticm2m/streamflow"
-TAGS=("latest" "0.13" "0.13.0")
-BUILD_DIR="streamflow/0.13"
-docker_build_and_push
+# Build and push all docker images and their associated tags
+docker_build_and_push "elasticm2m/base" "base/1.0" "1" "1.0"
+docker_build_and_push "elasticm2m/java" "java/8" "8" "8u45"
+docker_build_and_push "elasticm2m/tomcat" "tomcat/8.0" "8.0" "8.0.26"
+docker_build_and_push "elasticm2m/zookeeper" "zookeeper/3.4" "3.4" "3.4.6"
+docker_build_and_push "elasticm2m/storm" "storm/0.9" "0.9" "0.9.5"
+docker_build_and_push "elasticm2m/storm-nimbus" "storm-nimbus/0.9" "0.9" "0.9.5"
+docker_build_and_push "elasticm2m/storm-supervisor" "storm-supervisor/0.9" "0.9" "0.9.5"
+docker_build_and_push "elasticm2m/storm-ui" "storm-ui/0.9" "0.9" "0.9.5"
+docker_build_and_push "elasticm2m/logstash" "logstash/1.5" "1.5" "1.5.0"
+docker_build_and_push "elasticm2m/streamflow" "streamflow/0.13" "0.13" "0.13.0"
