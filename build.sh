@@ -1,29 +1,38 @@
-echo "Building elasticm2m/base"
-docker build -t elasticm2m/base:1.0 base/1.0
+#!/usr/bin/env bash
 
-echo "Building elasticm2m/java"
-docker build -t elasticm2m/java:8 java/8
+# Returns the most recent image id for a given repository
+resolve_image_id() {
+    local repository=$1
+    echo $(docker images | grep $repository | head -n 1 | awk '{print $3}')
+}
 
-echo "Building elasticm2m/tomcat"
-docker build -t elasticm2m/tomcat:8.0 tomcat/8.0
+# Builds and pushes docker image with the associated tags
+docker_build_and_push() {
+    local repository=$1
+    local build_dir=$2
+    local tags=${@:3}
 
-echo "Building elasticm2m/zookeeper..."
-docker build -t elasticm2m/zookeeper:3.4 zookeeper/3.4
+    echo "Building repository: $repository"
 
-echo "Building elasticm2m/storm..."
-docker build -t elasticm2m/storm:0.9 storm/0.9
+    docker build -t "$repository:latest" --pull=true "$build_dir"
+    local id=$(resolve_image_id $repository)
 
-echo "Building elasticm2m/storm-nimbus..."
-docker build -t elasticm2m/storm-nimbus:0.9 storm-nimbus/0.9
+    for tag in ${tags[@]}
+    do
+        echo "Pushing Tag: $repository:$tag"
+        docker tag -f $id $repository:$tag
+        docker push $repository:$tag
+    done
+}
 
-echo "Building elasticm2m/storm-supervisor..."
-docker build -t elasticm2m/storm-supervisor:0.9 storm-supervisor/0.9
-
-echo "Building elasticm2m/storm-ui..."
-docker build -t elasticm2m/storm-ui:0.9 storm-ui/0.9
-
-echo "Building elasticm2m/logstash..."
-docker build -t elasticm2m/logstash:1.5 logstash/1.5
-
-echo "Building elasticm2m/streamflow..."
-docker build -t elasticm2m/streamflow:0.12 streamflow/0.12
+# Build and push all docker images and their associated tags
+docker_build_and_push "elasticm2m/base" "base/1.0" "1" "1.0"
+docker_build_and_push "elasticm2m/java" "java/8" "8" "8u60"
+docker_build_and_push "elasticm2m/tomcat" "tomcat/8.0" "8.0" "8.0.26"
+docker_build_and_push "elasticm2m/zookeeper" "zookeeper/3.4" "3.4" "3.4.6"
+docker_build_and_push "elasticm2m/storm" "storm/0.9" "0.9" "0.9.5"
+docker_build_and_push "elasticm2m/storm-nimbus" "storm-nimbus/0.9" "0.9" "0.9.5"
+docker_build_and_push "elasticm2m/storm-supervisor" "storm-supervisor/0.9" "0.9" "0.9.5"
+docker_build_and_push "elasticm2m/storm-ui" "storm-ui/0.9" "0.9" "0.9.5"
+docker_build_and_push "elasticm2m/logstash" "logstash/1.5" "1.5" "1.5.0"
+docker_build_and_push "elasticm2m/streamflow" "streamflow/0.13" "0.13" "0.13.0"
