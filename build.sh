@@ -27,7 +27,7 @@ docker_build_and_push() {
 
 # Build and push all docker images and their associated tags
 docker_build_and_push "elasticm2m/base" "base/1.0" "1" "1.0"
-docker_build_and_push "elasticm2m/java" "java/8" "8" "8u45"
+docker_build_and_push "elasticm2m/java" "java/8" "8" "8u60"
 docker_build_and_push "elasticm2m/tomcat" "tomcat/8.0" "8.0" "8.0.26"
 docker_build_and_push "elasticm2m/zookeeper" "zookeeper/3.4" "3.4" "3.4.6"
 docker_build_and_push "elasticm2m/storm" "storm/0.9" "0.9" "0.9.5"
