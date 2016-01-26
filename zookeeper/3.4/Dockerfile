@@ -11,6 +11,8 @@ RUN mv /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg
 WORKDIR /opt/zookeeper
 ENV ZK_HOME /opt/zookeeper
 
+ENV ZK_AUTOPURGE_INTERVAL 1
+
 EXPOSE 2181 2888 3888
 
 CMD /usr/bin/configure-autopurge.sh \
