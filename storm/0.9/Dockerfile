@@ -8,7 +8,7 @@ RUN ln -s /opt/apache-storm-0.9.5 /opt/storm
 WORKDIR /opt/storm
 ENV STORM_HOME /opt/storm
 
-VOLUME ["/var/log/storm"]
+VOLUME ["/var/log/storm", "/opt/storm/storm-local"]
 
 COPY storm.yaml $STORM_HOME/conf/storm.yaml
 COPY cluster.xml $STORM_HOME/logback/cluster.xml
